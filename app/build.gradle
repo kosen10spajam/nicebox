@@ -1,0 +1,98 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+
+def VERSION_CODE = 1
+def VERSION_NAME = "1.0.0"
+def PACKAGE_NAME = "xyz.dokup.example"
+def MIN_SDK_VERSION = 18
+def TARGET_SDK_VERSION = 22
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId PACKAGE_NAME
+        minSdkVersion MIN_SDK_VERSION
+        targetSdkVersion TARGET_SDK_VERSION
+        versionCode VERSION_CODE
+        versionName VERSION_NAME
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    packagingOptions {
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
+    signingConfigs {
+        debug {
+        }
+        release {
+//            storeFile file(productStoreFile)
+//            keyAlias productKeyAlias
+//            storePassword productStorePassword
+//            keyPassword productKeyPassword
+        }
+    }
+    buildTypes {
+        debug {
+            multiDexEnabled false
+            jniDebuggable false
+            renderscriptDebuggable false
+            applicationIdSuffix ".debug"
+            versionNameSuffix '-dev'
+        }
+        release {
+            minifyEnabled true
+            shrinkResources false // minifyEnabled true の指定必須
+            proguardFile getDefaultProguardFile('proguard-android.txt')
+            proguardFile file('proguard-rules.pro')
+
+            multiDexEnabled false
+
+            jniDebuggable false
+            renderscriptDebuggable false
+            signingConfig signingConfigs.release
+        }
+    }
+    productFlavors {
+        develop {
+            applicationId "${PACKAGE_NAME}.develop"
+        }
+        staging {
+            applicationId "${PACKAGE_NAME}.staging"
+        }
+        production {
+            applicationId PACKAGE_NAME
+        }
+    }
+    compileOptions {
+        encoding = "UTF-8"
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile "com.android.support:appcompat-v7:${supportPackageVersion}"
+    compile "com.android.support:preference-v7:${supportPackageVersion}"
+    compile "com.android.support:design:${supportPackageVersion}"
+    compile "com.android.support:percent:${supportPackageVersion}"
+    compile "com.android.support:support-annotations:${supportPackageVersion}"
+
+    compile "com.jakewharton:butterknife:7.0.1"
+    apt "com.jakewharton:butterknife:7.0.1"
+
+    apt "com.google.dagger:dagger-compiler:2.2"
+    compile 'com.google.dagger:dagger:2.2'
+    compile 'org.glassfish:javax.annotation:10.0-b28'
+
+    compile 'com.squareup.retrofit2:retrofit:2.0.1'
+    compile 'com.squareup.okhttp3:okhttp:3.2.0'
+
+}
