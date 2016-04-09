@@ -1,14 +1,18 @@
 package net.kosen10s.nicebox.service;
 
+import android.app.PendingIntent;
 import android.bluetooth.le.ScanCallback;
 import android.bluetooth.le.ScanResult;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 
 import net.kosen10s.bluetooth.BluetoothScanHelper;
+import net.kosen10s.nicebox.MainActivity;
 import net.kosen10s.nicebox.R;
+import net.kosen10s.nicebox.preference.StatusPreference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +25,8 @@ public class BeaconDetectingService extends BaseService {
     private final BeaconDetectingService self = this;
 
     private static final int NOTIFICATION_ID = 1;
+    private static final int REQUEST_CODE_NICE = 1;
+    public static final String KEY_BUNDLE = "receive_nice";
 
     public static BaseService activeService;
     private BluetoothScanHelper mHelper;
@@ -52,6 +58,10 @@ public class BeaconDetectingService extends BaseService {
         builder.setSmallIcon(R.mipmap.ic_launcher);
         builder.setContentTitle("Nicebox");
         builder.setContentText(text);
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra(KEY_BUNDLE, true);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), REQUEST_CODE_NICE, intent, PendingIntent.FLAG_ONE_SHOT);
+        builder.setContentIntent(pendingIntent);
 
         NotificationManagerCompat manager = NotificationManagerCompat.from(getApplicationContext());
         manager.notify(NOTIFICATION_ID, builder.build());
@@ -63,7 +73,9 @@ public class BeaconDetectingService extends BaseService {
         public void onScanResult(int callbackType, ScanResult result) {
             String detectedDevice = result.getDevice().getAddress();
             if(!mDetectedDeviceList.contains(detectedDevice)) {
-                displayNotification("イイネを受信したよ！");
+                displayNotification("ナイスを受信したよ！");
+                StatusPreference preference = new StatusPreference(self);
+                preference.increaseStatus();
                 Log.d(TAG, "つらい");
                 mDetectedDeviceList.add(detectedDevice);
             }
