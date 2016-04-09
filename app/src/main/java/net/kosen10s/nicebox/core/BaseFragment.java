@@ -1,4 +1,4 @@
-package xyz.dokup.androidquicktemplate.core;
+package net.kosen10s.nicebox.core;
 
 import android.support.v4.app.Fragment;
 

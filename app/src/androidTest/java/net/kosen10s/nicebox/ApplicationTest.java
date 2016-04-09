@@ -1,4 +1,4 @@
-package xyz.dokup.androidquicktemplate;
+package net.kosen10s.nicebox;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

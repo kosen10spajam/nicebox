@@ -3,9 +3,9 @@ apply plugin: 'com.neenbedankt.android-apt'
 
 def VERSION_CODE = 1
 def VERSION_NAME = "1.0.0"
-def PACKAGE_NAME = "xyz.dokup.example"
+def PACKAGE_NAME = "net.kosen10s.nicebox"
 def MIN_SDK_VERSION = 18
-def TARGET_SDK_VERSION = 22
+def TARGET_SDK_VERSION = 23
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -95,4 +95,6 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.0.1'
     compile 'com.squareup.okhttp3:okhttp:3.2.0'
 
+    apt 'com.github.gfx.android.orma:orma-processor:2.4.1'
+    compile 'com.github.gfx.android.orma:orma:2.4.1'
 }

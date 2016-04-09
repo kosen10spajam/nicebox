@@ -1,7 +1,7 @@
-package xyz.dokup.androidquicktemplate.core;
+package net.kosen10s.nicebox.core;
 
 import dagger.Component;
-import xyz.dokup.androidquicktemplate.MainActivity;
+import net.kosen10s.nicebox.MainActivity;
 
 @Component(
         modules = MyModule.class
