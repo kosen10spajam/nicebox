@@ -68,7 +68,7 @@ public class MainFragment extends BaseFragment {
         ButterKnife.bind(this, view);
 
         mStatusText.setText(String.valueOf(status));
-        setPackmanSize(25);
+        setPackmanSize(status);
         return view;
     }
 
