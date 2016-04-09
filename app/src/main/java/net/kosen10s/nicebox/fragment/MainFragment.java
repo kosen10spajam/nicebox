@@ -72,23 +72,23 @@ public class MainFragment extends BaseFragment {
         return view;
     }
 
-    public void setPackmanSize(int state) {
+    public void setPackmanSize(int status) {
         Display disp = getBaseActivity().getWindowManager().getDefaultDisplay();
         Point p = new Point();
         disp.getSize(p);
         ViewGroup.LayoutParams params = mPacmanImage.getLayoutParams();
 
         double ratio;
-        if (state >= PACMAN_MAX) {
+        if (status >= PACMAN_MAX) {
             ratio = PACMAN_MAX_RAITO;
         }
-        else if (state >= PACMAN_LEARGE) {
+        else if (status >= PACMAN_LEARGE) {
             ratio = PACMAN_LEARGE_RAITO;
         }
-        else if (state >= PACMAN_MIDDLE){
+        else if (status >= PACMAN_MIDDLE){
             ratio = PACMAN_MIDDLE_RAITO;
         }
-        else if (state >= PACMAN_SMALL) {
+        else if (status >= PACMAN_SMALL) {
             ratio = PACMAN_SMALL_RAITO;
         }
         else {
