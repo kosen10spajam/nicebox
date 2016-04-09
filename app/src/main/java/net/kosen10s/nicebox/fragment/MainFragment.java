@@ -11,11 +11,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
 import net.kosen10s.nicebox.R;
 import net.kosen10s.nicebox.core.BaseFragment;
 import net.kosen10s.nicebox.preference.StatusPreference;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * Created by e10dokup on 2016/04/09

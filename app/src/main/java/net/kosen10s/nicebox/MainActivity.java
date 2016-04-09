@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import net.kosen10s.nicebox.core.BaseActivity;
 import net.kosen10s.nicebox.core.BaseFragment;
 import net.kosen10s.nicebox.fragment.MainFragment;
+import net.kosen10s.nicebox.service.BeaconDetectingService;
 
 public class MainActivity extends BaseActivity {
 
@@ -18,6 +19,8 @@ public class MainActivity extends BaseActivity {
 
         //Fragmentを置く
         replaceFragment(new MainFragment(), false);
+
+        new BeaconDetectingService().startResident(this);
 
     }
 
