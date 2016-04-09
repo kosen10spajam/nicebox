@@ -1,8 +1,12 @@
 package net.kosen10s.nicebox.fragment;
 
+import android.bluetooth.le.AdvertiseCallback;
+import android.bluetooth.le.AdvertiseSettings;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,12 +15,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.kosen10s.bluetooth.BluetoothAdvertiseHelper;
 import net.kosen10s.nicebox.R;
 import net.kosen10s.nicebox.core.BaseFragment;
 import net.kosen10s.nicebox.preference.StatusPreference;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by e10dokup on 2016/04/09
@@ -58,6 +64,10 @@ public class MainFragment extends BaseFragment {
     @Bind(R.id.image_pacman)
     ImageView mPacmanImage;
 
+    private BluetoothAdvertiseHelper mBluetoothAdvertiseHelper;
+    private boolean advertising = false;
+    private Handler mHandler;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -68,8 +78,19 @@ public class MainFragment extends BaseFragment {
         ButterKnife.bind(this, view);
 
         mStatusText.setText(String.valueOf(status));
+        mBluetoothAdvertiseHelper = new BluetoothAdvertiseHelper(getBaseActivity());
+        mHandler = new Handler();
         setPackmanSize(status);
         return view;
+    }
+
+
+    @OnClick(R.id.btn_nice)
+    public void onClickNiceButton() {
+        if(!advertising) {
+            mBluetoothAdvertiseHelper.startAdvertising(mAdvertiseCallback);
+            advertising = true;
+        }
     }
 
     public void setPackmanSize(int status) {
@@ -100,4 +121,24 @@ public class MainFragment extends BaseFragment {
         params.height = size;
         mPacmanImage.setLayoutParams(params);
     }
+
+    AdvertiseCallback mAdvertiseCallback = new AdvertiseCallback() {
+        @Override
+        public void onStartSuccess(AdvertiseSettings settingsInEffect) {
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Log.d(TAG, "stop advertising");
+                    mBluetoothAdvertiseHelper.stopAdvertising(mAdvertiseCallback);
+                    advertising = false;
+                }
+            }, 10000);
+        }
+
+        @Override
+        public void onStartFailure(int errorCode) {
+            super.onStartFailure(errorCode);
+            advertising = false;
+        }
+    };
 }

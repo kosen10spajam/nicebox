@@ -38,8 +38,7 @@ public class BeaconDetectingService extends BaseService {
         activeService = this;
         mHelper = new BluetoothScanHelper(this);
         mHelper.startScanning(mScanCallback);
-
-        // TODO: BLE scanning start
+        Log.d(TAG, "Start scanning");
     }
 
     public static void stopResidentIfActive(Context context) {

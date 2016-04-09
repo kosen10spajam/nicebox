@@ -3,4 +3,6 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <string name="beacon_uuid">4c35c8f0-fe20-11e5-a837-0800200c9a66</string>
 </resources>
