@@ -27,4 +27,9 @@ public class StatusPreference {
         editor.putInt(statusKey, status);
         return editor.commit();
     }
+
+    public boolean increaseStatus() {
+        int status = getStatus();
+        return setStatus(status + 1);
+    }
 }
