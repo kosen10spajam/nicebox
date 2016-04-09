@@ -40,8 +40,8 @@ public class BluetoothAdvertiseHelper {
         settingsBuilder.setConnectable(false);
 
         // Advertise data
-        final byte[] manufactureData = new byte[23];
-        ByteBuffer byteBuffer = ByteBuffer.wrap(manufactureData);
+        final byte[] manufacturerData = new byte[23];
+        ByteBuffer byteBuffer = ByteBuffer.wrap(manufacturerData);
         byteBuffer.put((byte) 0x02);
         byteBuffer.put((byte) 0x15);
 
@@ -54,6 +54,7 @@ public class BluetoothAdvertiseHelper {
 
         final int appleManufactureId = 0x004C;
         final AdvertiseData.Builder dataBuilder = new AdvertiseData.Builder();
+        dataBuilder.addManufacturerData(appleManufactureId, manufacturerData);
 
         mBluetoothLeAdvertiser.startAdvertising(settingsBuilder.build(), dataBuilder.build(), callback);
     }

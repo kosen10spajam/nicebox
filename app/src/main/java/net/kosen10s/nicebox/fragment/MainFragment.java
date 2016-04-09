@@ -1,6 +1,9 @@
 package net.kosen10s.nicebox.fragment;
 
+import android.bluetooth.le.AdvertiseCallback;
+import android.bluetooth.le.AdvertiseSettings;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +33,8 @@ public class MainFragment extends BaseFragment {
     TextView mStatusText;
 
     private BluetoothAdvertiseHelper mBluetoothAdvertiseHelper;
+    private boolean advertising = false;
+    private Handler mHandler;
 
     @Nullable
     @Override
@@ -42,11 +47,33 @@ public class MainFragment extends BaseFragment {
 
         mStatusText.setText(String.valueOf(status));
         mBluetoothAdvertiseHelper = new BluetoothAdvertiseHelper(getBaseActivity());
+        mHandler = new Handler();
         return view;
     }
 
     @OnClick(R.id.btn_nice)
     public void onClickNiceButton() {
-        mBluetoothAdvertiseHelper.startAdvertising();
+        if(!advertising) {
+            mBluetoothAdvertiseHelper.startAdvertising(mAdvertiseCallback);
+            advertising = true;
+        }
     }
+
+    AdvertiseCallback mAdvertiseCallback = new AdvertiseCallback() {
+        @Override
+        public void onStartSuccess(AdvertiseSettings settingsInEffect) {
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    mBluetoothAdvertiseHelper.stopAdvertising(mAdvertiseCallback);
+                    advertising = false;
+                }
+            }, 10000);
+        }
+
+        @Override
+        public void onStartFailure(int errorCode) {
+            super.onStartFailure(errorCode);
+        }
+    };
 }
