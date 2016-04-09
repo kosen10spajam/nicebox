@@ -7,11 +7,9 @@ import android.bluetooth.le.ScanCallback;
 import android.bluetooth.le.ScanFilter;
 import android.bluetooth.le.ScanSettings;
 import android.content.Context;
-import android.os.ParcelUuid;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Created by e10dokup on 2016/04/01
@@ -35,12 +33,12 @@ public class BluetoothScanHelper {
 
     public void startScanning(ScanCallback callback) {
         List<ScanFilter> scanFilters = new ArrayList<>();
-        ScanFilter.Builder filterBuilder = new ScanFilter.Builder();
-        filterBuilder.setServiceUuid(new ParcelUuid(UUID.fromString("9752989F-1EC9-4446-85BF-8AB1C173CC89")));
-        scanFilters.add(filterBuilder.build());
-        ScanFilter.Builder filterBuilder2 = new ScanFilter.Builder();
-        filterBuilder2.setServiceUuid(new ParcelUuid(UUID.fromString("9752990A-1EC9-4446-85BF-8AB1C173CC89")));
-        scanFilters.add(filterBuilder2.build());
+//        ScanFilter.Builder filterBuilder = new ScanFilter.Builder();
+//        filterBuilder.setServiceUuid(new ParcelUuid(UUID.fromString("9752989F-1EC9-4446-85BF-8AB1C173CC89")));
+//        scanFilters.add(filterBuilder.build());
+//        ScanFilter.Builder filterBuilder2 = new ScanFilter.Builder();
+//        filterBuilder2.setServiceUuid(new ParcelUuid(UUID.fromString("9752990A-1EC9-4446-85BF-8AB1C173CC89")));
+//        scanFilters.add(filterBuilder2.build());
 
         ScanSettings.Builder settingsBuilder = new ScanSettings.Builder();
         settingsBuilder.setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY);
