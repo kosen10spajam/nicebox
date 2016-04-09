@@ -8,12 +8,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import net.kosen10s.bluetooth.BluetoothAdvertiseHelper;
 import net.kosen10s.nicebox.R;
 import net.kosen10s.nicebox.core.BaseFragment;
 import net.kosen10s.nicebox.preference.StatusPreference;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by e10dokup on 2016/04/09
@@ -27,6 +29,8 @@ public class MainFragment extends BaseFragment {
     @Bind(R.id.text_status)
     TextView mStatusText;
 
+    private BluetoothAdvertiseHelper mBluetoothAdvertiseHelper;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -37,6 +41,12 @@ public class MainFragment extends BaseFragment {
         ButterKnife.bind(this, view);
 
         mStatusText.setText(String.valueOf(status));
+        mBluetoothAdvertiseHelper = new BluetoothAdvertiseHelper(getBaseActivity());
         return view;
+    }
+
+    @OnClick(R.id.btn_nice)
+    public void onClickNiceButton() {
+        mBluetoothAdvertiseHelper.startAdvertising();
     }
 }
