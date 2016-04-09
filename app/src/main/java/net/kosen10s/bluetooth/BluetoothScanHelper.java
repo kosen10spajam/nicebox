@@ -7,10 +7,10 @@ import android.bluetooth.le.ScanCallback;
 import android.bluetooth.le.ScanFilter;
 import android.bluetooth.le.ScanSettings;
 import android.content.Context;
-import android.os.ParcelUuid;
 
 import net.kosen10s.nicebox.R;
 
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -38,9 +38,22 @@ public class BluetoothScanHelper {
     }
 
     public void startScanning(ScanCallback callback) {
+        final int appleManufactureId = 0x004C;
+        final byte[] manufacturerData = new byte[23];
+        ByteBuffer byteBuffer = ByteBuffer.wrap(manufacturerData);
+        byteBuffer.put((byte) 0x02);
+        byteBuffer.put((byte) 0x15);
+
+        final UUID uuid = UUID.fromString(mContext.getString(R.string.beacon_uuid));
+        byteBuffer.putLong(uuid.getMostSignificantBits());
+        byteBuffer.putLong(uuid.getLeastSignificantBits());
+
+        byteBuffer.putShort((short) 0x0A);
+        byteBuffer.putShort((short) 0x1F);
+
         List<ScanFilter> scanFilters = new ArrayList<>();
         ScanFilter.Builder filterBuilder = new ScanFilter.Builder();
-        filterBuilder.setServiceUuid(new ParcelUuid(UUID.fromString(mContext.getString(R.string.beacon_uuid))));
+        filterBuilder.setManufacturerData(appleManufactureId, manufacturerData);
         scanFilters.add(filterBuilder.build());
 
         ScanSettings.Builder settingsBuilder = new ScanSettings.Builder();

@@ -21,7 +21,6 @@ public class BluetoothAdvertiseHelper {
     private final BluetoothAdvertiseHelper self = this;
 
     private BluetoothLeAdvertiser mBluetoothLeAdvertiser;
-    private boolean mScanning;
     private Context mContext;
 
     public BluetoothAdvertiseHelper(Context context) {

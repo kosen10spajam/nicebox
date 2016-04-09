@@ -5,6 +5,7 @@ import android.bluetooth.le.AdvertiseSettings;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,6 +66,7 @@ public class MainFragment extends BaseFragment {
             mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    Log.d(TAG, "stop advertising");
                     mBluetoothAdvertiseHelper.stopAdvertising(mAdvertiseCallback);
                     advertising = false;
                 }
@@ -74,6 +76,7 @@ public class MainFragment extends BaseFragment {
         @Override
         public void onStartFailure(int errorCode) {
             super.onStartFailure(errorCode);
+            advertising = false;
         }
     };
 }
