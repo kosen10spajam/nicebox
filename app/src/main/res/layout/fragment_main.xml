@@ -8,8 +8,9 @@
         android:layout_height="wrap_content"
         android:text="ナイス！"
         android:id="@+id/btn_nice"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="79dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -20,4 +21,13 @@
         android:layout_above="@+id/btn_nice"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="79dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_above="@+id/text_status"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="106dp"
+        android:src="@drawable/ic_pacman" />
 </RelativeLayout>
