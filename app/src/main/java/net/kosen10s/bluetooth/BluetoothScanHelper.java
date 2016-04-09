@@ -22,7 +22,7 @@ public class BluetoothScanHelper {
     private static final String TAG = BluetoothScanHelper.class.getSimpleName();
     private final BluetoothScanHelper self = this;
 
-    private BluetoothLeScanner mBaagit luetoothLeScanner;
+    private BluetoothLeScanner mBluetoothLeScanner;
     private boolean mScanning;
     private Context mContext;
 
