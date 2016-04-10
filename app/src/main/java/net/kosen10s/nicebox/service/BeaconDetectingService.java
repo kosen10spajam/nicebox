@@ -58,6 +58,7 @@ public class BeaconDetectingService extends BaseService {
         builder.setSmallIcon(R.mipmap.ic_launcher);
         builder.setContentTitle("Nicebox");
         builder.setContentText(text);
+        builder.setAutoCancel(true);
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra(KEY_BUNDLE, true);
         PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), REQUEST_CODE_NICE, intent, PendingIntent.FLAG_ONE_SHOT);
