@@ -62,7 +62,7 @@ public class MainFragment extends BaseFragment {
     @Bind(R.id.text_status)
     TextView mStatusText;
     @Bind(R.id.image_pacman)
-    ImageView mPacmanImage;
+    Button mPacmanImage;
 
     private BluetoothAdvertiseHelper mBluetoothAdvertiseHelper;
     private boolean advertising = false;
