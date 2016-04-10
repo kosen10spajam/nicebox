@@ -23,11 +23,11 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp" />
 
-    <ImageView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/image_pacman"
-        android:src="@drawable/ic_pacman"
+        android:background="@drawable/pacman"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="53dp" />
